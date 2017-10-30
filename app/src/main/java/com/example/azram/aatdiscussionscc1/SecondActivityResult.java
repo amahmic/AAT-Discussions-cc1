@@ -5,13 +5,15 @@ import io.realm.annotations.PrimaryKey;
 
 public class SecondActivityResult extends RealmObject {
 
+    public static final int INVALID_ID = -1;
+
     @PrimaryKey
     private int id;
     private String message;
     private boolean valid;
 
     public SecondActivityResult() {
-        this.id = 0;
+        this.id = INVALID_ID;
         this.message = null;
         this.valid = false;
     }
