@@ -4,6 +4,7 @@
     <string name="button2">Button 2</string>
     <string name="button3">Return to previous activity</string>
     <string name="sendPostButton">Posalji</string>
+    <string name="getMePleaseButton">Get me please</string>
     <string name="dialogMessage">Dialog message</string>
     <string name="dialogMessageOnResult">From second activity</string>
     <string name="dialogMessageButton2">From button2</string>

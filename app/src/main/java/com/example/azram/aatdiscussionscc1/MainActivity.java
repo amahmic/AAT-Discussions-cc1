@@ -8,7 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.example.azram.aatdiscussionscc1.data.AnswerWrapper;
 import com.example.azram.aatdiscussionscc1.data.Example;
+import com.example.azram.aatdiscussionscc1.data.GetMePleaseWrapper;
+import com.example.azram.aatdiscussionscc1.data.Obj2;
+import com.example.azram.aatdiscussionscc1.data.ObjAnswer;
 import com.example.azram.aatdiscussionscc1.data.Root;
 
 import io.realm.Realm;
@@ -36,10 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
     private Realm realm;
 
+    private Retrofit retrofit;
+
+    private ExampleApiService service;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://58489054.ngrok.io/")
+                .build();
+
+        service = retrofit.create(ExampleApiService.class);
 
         realm = Realm.getDefaultInstance();
 
@@ -63,12 +78,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.sendPostButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Retrofit retrofit = new Retrofit.Builder()
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl("http://58489054.ngrok.io/")
-                        .build();
-
-                ExampleApiService service = retrofit.create(ExampleApiService.class);
 
                 Call<Void> postRoot = service.postRoot(new Example(new Root("azra")));
                 postRoot.enqueue(new Callback<Void>() {
@@ -84,6 +93,37 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(Call<Void> call, Throwable t) {
                         Log.i(LOG_TAG, "ON FAILURE");
 
+                    }
+                });
+            }
+        });
+
+        findViewById(R.id.getMePleaseButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                service.getMePlease().enqueue(new Callback<GetMePleaseWrapper>() {
+                    @Override
+                    public void onResponse(Call<GetMePleaseWrapper> call, Response<GetMePleaseWrapper> response) {
+                        Log.i(LOG_TAG, "RESPONSE");
+                        Log.i(LOG_TAG, String.valueOf(response.code()));
+
+                        service.postAnswer(new AnswerWrapper(new ObjAnswer(new Obj2("AAT ludilo", "azra", 27)))).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                Log.i(LOG_TAG, "RESPONSE");
+                                Log.i(LOG_TAG, String.valueOf(response.code()));
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.i(LOG_TAG, "FAILURE");
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetMePleaseWrapper> call, Throwable t) {
+                        Log.i(LOG_TAG, "FAILURE");
                     }
                 });
             }
