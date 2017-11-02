@@ -39,4 +39,13 @@ public class SecondActivityResult extends RealmObject {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "SecondActivityResult{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", valid=" + valid +
+                '}';
+    }
 }

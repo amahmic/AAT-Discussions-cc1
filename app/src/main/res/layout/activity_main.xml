@@ -4,31 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.azram.aatdiscussionscc1.MainActivity"
+    tools:context="com.postRootWrapper.azram.aatdiscussionscc1.MainActivity"
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/startSecondActivityButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button1"/>
+        android:text="@string/start_second_activity"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/displayDialogMessageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button2"/>
+        android:text="@string/display_dialog_message"/>
 
     <Button
         android:id="@+id/sendPostButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sendPostButton"/>
+        android:text="@string/send_post"/>
 
     <Button
         android:id="@+id/getMePleaseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/getMePleaseButton"/>
+        android:text="@string/get_me_please"/>
 
 </LinearLayout>

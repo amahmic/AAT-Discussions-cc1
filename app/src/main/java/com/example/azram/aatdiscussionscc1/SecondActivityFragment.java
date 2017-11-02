@@ -4,8 +4,10 @@ package com.example.azram.aatdiscussionscc1;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +22,15 @@ public class SecondActivityFragment extends Fragment {
 
     private static final String LOG_TAG = SecondActivityFragment.class.getName();
 
+    /**
+     * Key za id {@link SecondActivityResult} objekta spasenog u bazi
+     * Salje se u result intentu
+     */
     public static final String RESULT_ID_KEY = "second-activity-result-id";
+
+    /**
+     * Id za {@link SecondActivityResult} objekat spasen u bazi
+     */
     private static final int RESULT_ID = 1;
 
     public SecondActivityFragment() {
@@ -41,13 +51,10 @@ public class SecondActivityFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // Na klik buttona spasi SecondActivityResult u bazu, dodaj njegov id u intent i finish activity
         getActivity().findViewById(R.id.fragmentButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,12 +62,13 @@ public class SecondActivityFragment extends Fragment {
                 Realm realm = null;
                 try {
                     realm = Realm.getDefaultInstance();
-                    final SecondActivityResult secondActivityResult = new SecondActivityResult(RESULT_ID, getString(R.string.returnedMessageFromFragment), true);
+                    final SecondActivityResult secondActivityResult = new SecondActivityResult(RESULT_ID, getString(R.string.message_from_fragment), true);
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
-                        public void execute(Realm realm) {
+                        public void execute(@NonNull Realm realm) {
                             realm.insertOrUpdate(secondActivityResult);
                             returnIntent.putExtra(RESULT_ID_KEY, RESULT_ID);
+                            Log.i(LOG_TAG, "Spasen: " + secondActivityResult.toString());
                         }
                     });
                 }

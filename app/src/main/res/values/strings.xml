@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">AATDiscussionsCC1</string>
-    <string name="button1">Button 1</string>
-    <string name="button2">Button 2</string>
+
+    <!-- MainActivity -->
+    <string name="start_second_activity">Start second activity</string>
+    <string name="display_dialog_message">Display dialog message</string>
+    <string name="send_post">Send post</string>
+    <string name="get_me_please">Get me please</string>
+
+    <string name="dialog_message">Dialog message</string>
+
+    <!-- SecondActivity -->
     <string name="button3">Return to previous activity</string>
-    <string name="sendPostButton">Posalji</string>
-    <string name="getMePleaseButton">Get me please</string>
-    <string name="dialogMessage">Dialog message</string>
-    <string name="dialogMessageOnResult">From second activity</string>
-    <string name="dialogMessageButton2">From button2</string>
-    <string name="fragmentButtonText">Return to previous activity (from fragment)</string>
-    <string name="returnedMessageFromFragment">Message from fragment</string>
+
+    <!-- SecondActivityFragment -->
+    <string name="return_to_previous_activity">Return to previous activity (from fragment)</string>
+    <string name="message_from_fragment">Message from fragment</string>
 </resources>

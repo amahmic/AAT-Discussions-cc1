@@ -1,21 +1,18 @@
 package com.example.azram.aatdiscussionscc1;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 public class SecondActivity extends AppCompatActivity {
 
-    private static final String FRAGMENT_VIEW_ID = "second-activity-fragment";
+    private static final String FRAGMENT_VIEW_TAG = "second-activity-fragment";
 
-    Fragment mFragment;
+    SecondActivityFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         setContentView(R.layout.activity_second);
 
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
@@ -25,12 +22,16 @@ public class SecondActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
-        });
+        });*/
 
-        if (savedInstanceState == null) {
+        mFragment = (SecondActivityFragment) getSupportFragmentManager().findFragmentByTag(FRAGMENT_VIEW_TAG);
+
+        if (mFragment == null) {
             mFragment = new SecondActivityFragment();
-            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(android.R.id.content, mFragment, FRAGMENT_VIEW_ID).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(android.R.id.content, mFragment, FRAGMENT_VIEW_TAG)
+                    .commit();
         }
     }
 }

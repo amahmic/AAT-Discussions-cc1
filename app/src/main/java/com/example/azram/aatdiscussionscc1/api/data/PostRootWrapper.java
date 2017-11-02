@@ -1,15 +1,15 @@
-package com.example.azram.aatdiscussionscc1.data;
+package com.example.azram.aatdiscussionscc1.api.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+public class PostRootWrapper {
 
     @SerializedName("root")
     @Expose
     private Root root;
 
-    public Example(Root root) {
+    public PostRootWrapper(Root root) {
         this.root = root;
     }
 
